@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
 public class EnemyController : MonoBehaviour
 {
     public bool IsAlive { get; private set; }

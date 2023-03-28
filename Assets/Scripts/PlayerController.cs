@@ -3,8 +3,12 @@ using UnityEngine.AI;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
+[RequireComponent(typeof(Animator), typeof(NavMeshAgent))]
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] 
+    private ProjectilesManager projectilesManager;
+    
     [SerializeField]
     private Waypoint[] waypoints;
 
@@ -15,9 +19,7 @@ public class PlayerController : MonoBehaviour
     private Transform bulletStartPoint;
 
     private static readonly int IsRunning = Animator.StringToHash("isRunning");
-    
-    private ProjectilesManager _projectilesManager;
-    
+
     private Animator _animator;
     
     private NavMeshAgent _navMeshAgent;
@@ -28,8 +30,6 @@ public class PlayerController : MonoBehaviour
     
     private void Awake()
     {
-        _projectilesManager = GameObject.Find("ProjectilesManager").GetComponent<ProjectilesManager>();
-        
         _animator = GetComponent<Animator>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
         
@@ -59,14 +59,14 @@ public class PlayerController : MonoBehaviour
         _touchControls.Disable();
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         if (!(Vector3.Distance(waypoints[_currentWaypoint].transform.position, transform.position) < 0.1))
         {
             return;
         }
         
-        if (!waypoints[_currentWaypoint].isCleared)
+        if (!waypoints[_currentWaypoint].IsCleared)
         {
             _animator.SetBool(IsRunning, false);
             return;
@@ -90,7 +90,7 @@ public class PlayerController : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(_touchControls.Touch.TouchPosition.ReadValue<Vector2>());
         Physics.Raycast(ray, out RaycastHit hitInfo);
 
-        GameObject bulletObject = _projectilesManager.GetFromPull();
+        GameObject bulletObject = projectilesManager.GetFromPull();
         if (bulletObject == null)
         {
             bulletObject = Instantiate(bullet, bulletStartPoint.position, bulletStartPoint.rotation);

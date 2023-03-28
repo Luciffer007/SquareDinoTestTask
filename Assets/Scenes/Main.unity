@@ -6024,6 +6024,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63ae8fbceaa3b3b43a513a70887cda68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  projectilesManager: {fileID: 1772026133}
   waypoints:
   - {fileID: 14411174}
   - {fileID: 1719541151}
@@ -11336,7 +11337,7 @@ GameObject:
   - component: {fileID: 1772026133}
   m_Layer: 0
   m_Name: ProjectilesManager
-  m_TagString: Untagged
+  m_TagString: ProjectilesManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

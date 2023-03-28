@@ -5,7 +5,7 @@ public class ProjectilesManager : MonoBehaviour
 {
     private Stack<GameObject> _projectilesPull;
     
-    void Awake()
+    private void Awake()
     {
         _projectilesPull = new Stack<GameObject>();
     }

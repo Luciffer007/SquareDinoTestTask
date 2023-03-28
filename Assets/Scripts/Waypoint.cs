@@ -6,7 +6,7 @@ public class Waypoint : MonoBehaviour
     [SerializeField]
     private EnemyController[] enemies;
 
-    public bool isCleared
+    public bool IsCleared
     {
         get
         {
@@ -17,17 +17,5 @@ public class Waypoint : MonoBehaviour
 
             return false;
         }
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
