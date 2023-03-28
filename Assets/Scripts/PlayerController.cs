@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour
 
     private static readonly int IsRunning = Animator.StringToHash("isRunning");
 
+    private Camera _mainCamera;
+
     private Animator _animator;
     
     private NavMeshAgent _navMeshAgent;
@@ -30,6 +32,8 @@ public class PlayerController : MonoBehaviour
     
     private void Awake()
     {
+        _mainCamera = Camera.main;
+        
         _animator = GetComponent<Animator>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
         
@@ -87,7 +91,7 @@ public class PlayerController : MonoBehaviour
     private void Fire(InputAction.CallbackContext context)
     {
         // Construct a ray from the current touch coordinates
-        Ray ray = Camera.main.ScreenPointToRay(_touchControls.Touch.TouchPosition.ReadValue<Vector2>());
+        Ray ray = _mainCamera.ScreenPointToRay(_touchControls.Touch.TouchPosition.ReadValue<Vector2>());
         Physics.Raycast(ray, out RaycastHit hitInfo);
 
         GameObject bulletObject = projectilesManager.GetFromPull();
